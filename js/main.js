@@ -1,18 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Custom Cursor
+
+    // 1. Custom Cursor — zero delay, always visible
     const cursor = document.querySelector('.custom-cursor');
-    const interactiveElements = document.querySelectorAll('a, button, .segment, .social-square, .logo-text, .tilted-pill, .small-pill');
+    let mouseX = -100, mouseY = -100;
 
     if (cursor) {
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
+        function updateCursor() {
+            cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+            requestAnimationFrame(updateCursor);
+        }
 
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        }, { passive: true });
+
+        requestAnimationFrame(updateCursor);
+
+        const interactiveElements = document.querySelectorAll(
+            'a, button, .segment, .social-square, .logo-text, .tilted-pill, .small-pill'
+        );
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
+
+        document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+        document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
     }
 
     // 2. Navbar Hide/Show on Scroll
@@ -22,10 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navbar) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                // Scrolling down
                 navbar.classList.add('hide');
             } else {
-                // Scrolling up
                 navbar.classList.remove('hide');
             }
             lastScrollY = window.scrollY;
@@ -34,13 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Fade-in Animation Observer
     const fadeElements = document.querySelectorAll('.fade-in');
-    
+
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: stop observing once faded in
-                // fadeObserver.unobserve(entry.target); 
             }
         });
     }, {
@@ -50,13 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fadeElements.forEach(el => fadeObserver.observe(el));
 
-    // 4. Hero Segmented Toggle Behavior (Basic Interaction)
+    // 4. Hero Segmented Toggle Behavior
     const segments = document.querySelectorAll('.segment');
     segments.forEach(segment => {
         segment.addEventListener('click', () => {
-            // Remove active class from all
             segments.forEach(s => s.classList.remove('active'));
-            // Add to clicked
             segment.classList.add('active');
         });
     });

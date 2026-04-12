@@ -116,7 +116,8 @@ header.hide {
 }
 
 .nav-links {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-md);
 }
 
@@ -124,15 +125,18 @@ header.hide {
     text-decoration: none;
     color: var(--text-primary);
     font-weight: 600;
-    padding: 6px 20px;
+    padding: 12px 20px;
     border: var(--border-thin);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-card);
+    background-color: white;
+    box-shadow: var(--shadow-main);
     transition: all 0.2s ease;
+    text-align: center;
 }
 
 .nav-pill:hover, .active-pill {
     background-color: var(--accent-yellow);
-    box-shadow: 2px 2px 0px 0px #000;
+    box-shadow: var(--shadow-hover);
     transform: translate(-2px, -2px);
 }
 
@@ -327,26 +331,43 @@ main {
 
 .hero-segmented {
     border: var(--border-main);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     overflow: hidden;
     display: inline-flex;
     background-color: white;
     box-shadow: var(--shadow-main);
     gap: 0;
+    align-self: flex-start;
 }
 
 .segment {
-    padding: 8px 24px;
-    font-weight: bold;
-    font-family: 'Outfit', sans-serif;
+    padding: 16px 24px;
     border-right: var(--border-main);
     margin-right: -3px; /* To prevent double border */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 250px;
+    text-align: left;
 }
 .segment:last-child {
     border-right: none;
 }
 .segment.active {
     background-color: var(--accent-yellow);
+}
+
+.segment-title {
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+}
+.segment-desc {
+    font-weight: normal;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    opacity: 0.8;
 }
 
 /* Lower Middle */
@@ -388,16 +409,32 @@ main {
     box-shadow: var(--shadow-main);
 }
 
-/* 3x3 Table */
+/* Grid Tables */
 .hero-grid-table {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     border: var(--border-main);
     border-radius: var(--radius-card);
     background-color: white;
     overflow: hidden;
-    box-shadow: var(--shadow-main);
+    box-shadow: 8px 8px 0px 0px #000;
     margin-top: var(--spacing-lg);
+}
+
+.hero-grid-table {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.hero-grid-table-4cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.hero-grid-table-4cols .grid-cell {
+    border: var(--border-main);
+    border-radius: var(--radius-card);
+    background-color: white;
+    box-shadow: var(--shadow-main);
 }
 
 .grid-cell {
@@ -408,17 +445,32 @@ main {
     display: flex;
     align-items: center;
 }
-.grid-cell:nth-child(3n) {
+
+/* 3-Column specific borders */
+.hero-grid-table > .grid-cell:nth-child(3n) {
     border-right: none;
 }
 .hero-grid-table > .grid-cell:nth-last-child(-n+3) {
     border-bottom: none;
 }
-.hero-grid-table > .grid-cell:nth-child(n+4):nth-child(-n+6) {
-    font-size: 1.5rem;
-    font-family: 'Outfit';
-    border-bottom-width: 1.5px; /* Thinner line for middle as in blueprint */
+
+/* Table Utilities */
+.table-header {
+    background-color: var(--accent-yellow);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
 }
+.closer-table {
+    margin-top: var(--spacing-sm) !important;
+}
+.small-text {
+    font-size: 0.95rem;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+/* 4-Column specific borders - removed since they are separate cards now */
 
 /* Secondary Section */
 .secondary-section {
@@ -767,15 +819,18 @@ main {
         align-self: center;
     }
     
-    .hero-grid-table {
+    
+    .hero-grid-table, .hero-grid-table-4cols {
         grid-template-columns: 1fr;
     }
     
-    .grid-cell:nth-child(3n) {
-        border-right: var(--border-main);
+    .hero-grid-table > .grid-cell:nth-child(n) {
+        border-right: none;
+    }
+    .hero-grid-table-4cols .grid-cell {
+        border-right: var(--border-main) !important;
     }
     .grid-cell {
-        border-right: none;
         justify-content: center;
     }
     

@@ -224,37 +224,38 @@ main {
 .hero-tilted-pills {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
     transform: rotate(-5deg);
     padding-top: var(--spacing-lg);
 }
 
 .tilted-pill {
-    padding: 8px 32px;
+    padding: 16px 64px;
     border: var(--border-main);
     border-radius: var(--radius-pill);
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
-    box-shadow: var(--shadow-main);
+    box-shadow: 8px 8px 0px 0px #000;
     display: inline-block;
     align-self: flex-start;
     text-transform: uppercase;
 }
 .tilted-pill:nth-child(2) {
-    margin-left: var(--spacing-lg);
+    margin-left: var(--spacing-xl);
 }
 .tilted-pill:nth-child(3) {
-    margin-left: calc(var(--spacing-lg) * 2);
+    margin-left: calc(var(--spacing-xl) * 2);
 }
 
 /* Right Card (Blueprint top right) */
 .hero-card {
     border: var(--border-main);
     border-radius: var(--radius-card);
-    width: 300px;
     background-color: white;
-    box-shadow: var(--shadow-main);
+    box-shadow: 8px 8px 0px 0px #000;
+    width: 450px;
+    min-height: 280px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -282,10 +283,11 @@ main {
 
 .card-body {
     padding: var(--spacing-lg) var(--spacing-md);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 120px;
+    flex-grow: 1;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--text-primary);
 }
 
 .line {
@@ -320,13 +322,13 @@ main {
 }
 
 .small-pill {
-    padding: 4px 16px;
+    padding: 12px 32px;
     border: var(--border-main);
-    border-radius: var(--radius-pill);
+    border-radius: 0;
     background-color: white;
     font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 2px 2px 0px 0px #000;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-main);
 }
 
 .hero-segmented {
@@ -380,15 +382,16 @@ main {
 }
 
 .text-structure {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-family: 'Outfit', sans-serif;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    line-height: 1.2;
 }
 .boxed-text {
     border: var(--border-main);
-    padding: 4px 16px;
+    padding: 8px 32px;
     border-radius: var(--radius-small);
     display: inline-block;
     align-self: flex-start;
@@ -396,7 +399,8 @@ main {
     background-color: var(--accent-red);
     color: white;
     transform: rotate(3deg);
-    box-shadow: 2px 2px 0px 0px #000;
+    box-shadow: var(--shadow-main);
+    font-size: 3rem;
 }
 
 .paragraph-box {

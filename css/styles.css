@@ -26,6 +26,7 @@
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
+    --spacing-xxl: 120px;
 }
 
 * {
@@ -37,6 +38,9 @@
 
 body {
     background-color: var(--bg-color);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
     color: var(--text-primary);
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
@@ -205,7 +209,7 @@ main {
 .hero-section {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: 160px var(--spacing-lg) var(--spacing-xxl);
 }
 
 .hero-content {
@@ -261,40 +265,82 @@ main {
     flex-direction: column;
 }
 
-.card-header-bar {
-    border-bottom: var(--border-main);
-    padding: 8px var(--spacing-md);
+.floating-pill-tl {
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    border: var(--border-main);
+    border-radius: var(--radius-pill);
+    background-color: white;
+    box-shadow: 4px 4px 0px 0px #000;
+    transform: rotate(-30deg);
+    z-index: 2;
+    padding: 6px 16px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    white-space: nowrap;
+}
+
+.centered-pill, .flex-center {
     display: flex;
-    gap: 6px;
-    background-color: var(--bg-color);
-    border-top-left-radius: 13px;
+    align-items: center;
+    justify-content: center;
+}
+.align-center {
+    align-items: center; /* will align flex children horizontally to center */
+}
+.text-sm {
+    font-size: 0.95rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
+}
+
+.card-row-top {
+    height: 60px;
+    border-bottom: var(--border-main);
+    background-color: white;
+    border-top-left-radius: 13px; /* approximate to fit inside border */
     border-top-right-radius: 13px;
 }
 
-.circle {
-    width: 12px;
-    height: 12px;
-    border: var(--border-thin);
-    border-radius: 50%;
+.card-row-mid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 50px;
+    border-bottom: var(--border-main);
+    background-color: white;
 }
-.circle.red { background-color: var(--accent-red); }
-.circle.yellow { background-color: var(--accent-yellow); }
-.circle.green { background-color: var(--accent-green); }
+.mid-col {
+    border-right: var(--border-main);
+}
+.mid-col:last-child {
+    border-right: none;
+}
 
-.card-body {
-    padding: var(--spacing-lg) var(--spacing-md);
+.card-row-bot {
+    padding: var(--spacing-xl) var(--spacing-xxl); /* give good spacing */
     flex-grow: 1;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background-color: white;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    justify-content: center;
 }
 
-.line {
-    height: 16px;
-    border: var(--border-thin);
+.outlined-line {
+    border: 3px solid #000;
     border-radius: var(--radius-pill);
-    background-color: var(--bg-color);
+    padding: 8px 16px;
+    background-color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .w-80 { width: 80%; }
 .w-60 { width: 60%; }
@@ -480,7 +526,7 @@ main {
 .secondary-section {
     max-width: 800px;
     margin: 0 auto;
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-xxl) var(--spacing-lg);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -523,9 +569,9 @@ main {
 .main-footer {
     background-color: var(--text-primary);
     color: var(--text-white);
-    padding: var(--spacing-xl) var(--spacing-lg);
-    border-top: var(--border-main);
+    padding: var(--spacing-xxl) var(--spacing-lg);
 }
+
 
 .footer-container {
     max-width: 1200px;
@@ -543,11 +589,9 @@ main {
 }
 
 .footer-brandbox {
-    border: 2px solid white;
-    padding: 8px 16px;
-    border-radius: var(--radius-pill);
     font-family: 'Outfit', sans-serif;
     font-weight: bold;
+    font-size: 2rem;
     display: inline-block;
     align-self: flex-start;
 }
@@ -763,9 +807,10 @@ main {
 }
 
 .final-cta-section {
-    padding: var(--spacing-xl) var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+    background-color: var(--accent-purple);
+    color: white;
+    text-align: center;
 }
 
 .cta-box {
